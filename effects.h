@@ -1,4 +1,6 @@
-
+/*
+ * most eeffects were taken from: https://www.tweaking4all.com/hardware/arduino/arduino-all-ledstrip-effects-in-one/
+ */
 
 // ***************************************
 // ** FastLed/NeoPixel Common Functions **
