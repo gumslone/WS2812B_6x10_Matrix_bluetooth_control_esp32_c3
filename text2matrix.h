@@ -1,4 +1,5 @@
 
+
 void charToArray(unsigned char num, uint8_t line, uint8_t(& arr)[6][8])
 {
   int i;
@@ -19,15 +20,15 @@ void swap(uint8_t* a, uint8_t* b)
 
 // Function to reverse
 // the given 2D arr[][]
-void reverseArray(uint8_t(& arr)[6][10])
+void reverseArray(uint8_t(& arr)[MATRIX_HEIGHT][MATRIX_WIDTH])
 {
 
   // Traverse each row of arr[][]
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < MATRIX_HEIGHT; i++) {
 
     // Initialise start and end index
     int start = 0;
-    int end = 10 - 1;
+    int end = MATRIX_WIDTH - 1;
 
     // Till start < end, swap the element
     // at start and end index
@@ -46,10 +47,10 @@ void reverseArray(uint8_t(& arr)[6][10])
 }
 
 
-void interchange(uint8_t(& arr)[6][10])
+void interchange(uint8_t(& arr)[MATRIX_HEIGHT][MATRIX_WIDTH])
 {
-  int cols = 10;
-  int rows = 6;
+  int cols = MATRIX_WIDTH;
+  int rows = MATRIX_HEIGHT;
   int lastRow = rows - 1;
 
   for (int j = 0; j <= lastRow / 2; j++ ) {
@@ -62,10 +63,10 @@ void interchange(uint8_t(& arr)[6][10])
   }
 }
 
-void rev2row(uint8_t(& arr)[6][10])
+void rev2row(uint8_t(& arr)[MATRIX_HEIGHT][MATRIX_WIDTH])
 {
-  int cols = 10;
-  int rows = 6;
+  int cols = MATRIX_WIDTH;
+  int rows = MATRIX_HEIGHT;
   int lastCol = cols - 1;
   for (int j = 0; j < rows; j++ ) {
     j++;
@@ -77,10 +78,10 @@ void rev2row(uint8_t(& arr)[6][10])
   }
 }
 // convert pixels to strip array
-void array2Strip(const uint8_t arr[6][10], uint8_t (&arr2s)[60])
+void array2Strip(const uint8_t arr[MATRIX_HEIGHT][MATRIX_WIDTH], uint8_t (&arr2s)[LED_COUNT])
 {
-  int cols = 10;
-  int rows = 6;
+  int cols = MATRIX_WIDTH;
+  int rows = MATRIX_HEIGHT;
   int index = 0;
 
   for (int j = 0; j < rows; j++ ) {
@@ -95,8 +96,8 @@ void array2Strip(const uint8_t arr[6][10], uint8_t (&arr2s)[60])
 void text2pixel(std::string text, uint8_t &skip)
 {
   uint8_t arr[6][8] {};
-  uint8_t conv_arr[6][10] {};
-  uint8_t strip_arr[60] {};
+  uint8_t conv_arr[MATRIX_HEIGHT][MATRIX_WIDTH] {};
+  uint8_t strip_arr[LED_COUNT] {};
   char* str = &text[0];
   byte lastChar = strlen(str) - 1; // Get the position of the last char
   str[lastChar] = '\0';
@@ -131,11 +132,11 @@ void text2pixel(std::string text, uint8_t &skip)
 
         int index = b + font4x6[0] * char_num;
 
-        if (skip > char_num * font4x6[0] && index < 10)
+        if (skip > char_num * font4x6[0] && index < MATRIX_WIDTH)
         {
           conv_arr[a][index] = arr[a][b + skip];
         }
-        else if (index - skip < 10 && index - skip >= 0)
+        else if (index - skip < MATRIX_WIDTH && index - skip >= 0)
         {
           conv_arr[a][index - skip] = arr[a][b];
         }
